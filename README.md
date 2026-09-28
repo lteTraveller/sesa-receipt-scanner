@@ -42,7 +42,6 @@ The SESA system operates through a streamlined flow connecting the client browse
 - **Data Handling:** Pandas, Pydantic
 - **Containerization:** Docker
 
-
 ## 📂 Folder Structure
 
 ```text
@@ -54,7 +53,7 @@ The SESA system operates through a streamlined flow connecting the client browse
 ├── database.py           # SQLAlchemy ORM and Neon DB connection logic
 ├── app.py                # Streamlit Web App and Gemini API integration
 └── sesa_svg.drawio.svg   # Architecture diagram
-
+```
 
 ## 🚀 Local Setup & Development
 
