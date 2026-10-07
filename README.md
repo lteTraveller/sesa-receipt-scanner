@@ -93,4 +93,54 @@ docker run -p 8501:8501 --env-file .env receipt-scanner
 ```
 Access the app at `http://localhost:8501`.
 
----
+## ☁️ AWS EC2 Deployment Guide
+
+Follow these steps to deploy the application on an AWS EC2 instance.
+
+### 1. EC2 Provisioning
+- Launch an **Ubuntu 24.04 LTS** instance (`t3.small` recommended).
+- **Security Group:** Allow inbound traffic on:
+  - Port `22` (SSH) from your IP.
+  - Port `8501` (Custom TCP) from anywhere (`0.0.0.0/0`).
+
+### 2. Server Configuration
+SSH into your instance and run the following commands:
+
+```bash
+# Update packages and install Docker & Git
+sudo apt-get update -y
+sudo apt-get install -y docker.io git
+
+# Enable Docker and add current user to docker group
+sudo systemctl enable --now docker
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+
+### 3. Clone & Configure
+```bash
+# Clone this repository
+git clone https://github.com/lteTraveller/sesa-receipt-scanner.git
+cd sesa-receipt-scanner
+
+# Create the .env file on the server
+nano .env
+```
+*Paste your `GEMINI_API_KEY` and `DATABASE_URL` (without quotes) and save.*
+
+### 4. Build & Run
+```bash
+# Build the Docker image
+docker build -t receipt-scanner .
+
+# Run the container in detached mode with auto-restart
+docker run -d --name receipt-scanner-app -p 8501:8501 --env-file .env --restart always receipt-scanner
+```
+
+Your app is now live at `http://<ec2-public-ip>:8501`!
+
+## 🐛 Troubleshooting Common Issues
+
+
+* **`SQLAlchemy URL ArgumentError`**: Remove quotation marks (`"`) from the variables in your `.env` file when using Docker `--env-file`.
+* **`429 RESOURCE_EXHAUSTED (Gemini)`**: You have hit the Free Tier rate limit (usually 20 requests/minute). Wait 30 seconds and try again, or add a billing account in Google AI Studio to increase your limits.

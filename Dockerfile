@@ -1,5 +1,7 @@
 FROM python:3.11-slim-bookworm
 WORKDIR /app
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
 COPY requirements.txt .
 RUN apt-get update \
 	&& apt-get upgrade -y \

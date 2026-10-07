@@ -61,9 +61,9 @@ def extract_receipt_data(image: Image.Image) -> ReceiptExtraction:
 
 
 # Streamlit Layout
-st.set_page_config(page_title="AI Document & Receipt Scanner", page_icon="🧾", layout="wide")
+st.set_page_config(page_title="SESA: Smart Document & Receipt Scanner", page_icon="🧾", layout="wide")
 
-st.title("🧾 Smart Document & Receipt Scanner")
+st.title("🧾 SESA: Smart Document & Receipt Scanner")
 st.caption("AI-Powered Information Extraction with Neon PostgreSQL Persistence")
 
 tab1, tab2 = st.tabs(["📤 Scan & Upload", "📊 Online Database Records"])
