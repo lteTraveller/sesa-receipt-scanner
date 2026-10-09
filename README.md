@@ -93,6 +93,7 @@ docker run -p 8501:8501 --env-file .env receipt-scanner
 ```
 Access the app at `http://localhost:8501`.
 
+
 ## ☁️ AWS EC2 Deployment Guide
 
 Follow these steps to deploy the application on an AWS EC2 instance.

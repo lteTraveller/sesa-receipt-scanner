@@ -1,12 +1,15 @@
 FROM python:3.11-slim-bookworm
 WORKDIR /app
+
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
+
 COPY requirements.txt .
 RUN apt-get update \
 	&& apt-get upgrade -y \
 	&& rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY database.py .
 COPY app.py .
 EXPOSE 8501
